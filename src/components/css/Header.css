@@ -1,0 +1,27 @@
+.content-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.year-dropdown {
+    background-color: #383838;
+    color: #cfcfcf;
+    font-weight: 500;
+    border: none;
+    padding: 5px 7px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    width: 90px;
+    height: 25px;
+    text-align: left;
+    margin-left: auto;
+}
+
+.year-dropdown option {
+    background-color: #383838;
+    color: #C4C4C4;
+}

@@ -1,0 +1,88 @@
+.quick-access {
+    background-color: #1b1b1b;
+    padding-bottom: 4px; /* Add padding to ensure spacing */
+}
+
+.quick-access h3 {
+    margin-top: 0;
+    font-size: 12px;
+    color: #FCFCFC;
+    border-bottom: 1px solid #242424; /* Line color */
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.quick-access .buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Adjusted space between buttons */
+}
+
+.quick-access .buttons button {
+    background-color: #28282a; /* Updated background color */
+    color: #f0f0f1;
+    padding: 12px 18px; /* Reduced padding */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    font-size: 12px; 
+    font-weight: bold;
+    gap:8px; /* Space between icon and text */
+    flex: 1; /* Allows buttons to grow and fill available space */
+    margin: 0 20px; /* Space on left and right of each button */
+}
+
+.quick-access .buttons button:hover {
+    background-color: #373737;
+}
+
+.quick-access .buttons .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px; /* Size of the icon circle */
+    height: 25px; /* Size of the icon circle */
+    border-radius: 50%;
+    margin-right: 5px; /* Space between icon and text */
+}
+
+.quick-access .buttons .icon-container.icon1 {
+    background-color: #6f2751;
+}
+
+.quick-access .buttons .icon-container.icon2 {
+    background-color: #222255;
+}
+
+.quick-access .buttons .icon-container.icon3 {
+    background-color: #124241;
+}
+
+.quick-access .buttons .icon-container.icon4 {
+    background-color: #682b3b;
+}
+
+.quick-access .buttons .icon {
+    font-size: 10px; /* Smaller icon size */
+    color: #fff; /* Default color */
+}
+
+/* Specific icon colors */
+.quick-access .buttons .icon-container.icon1 .icon {
+    color: #d02187;
+}
+
+.quick-access .buttons .icon-container.icon2 .icon {
+    color: #c09bf9;
+}
+
+.quick-access .buttons .icon-container.icon3 .icon {
+    color: #00d7c3;
+}
+
+.quick-access .buttons .icon-container.icon4 .icon {
+    color: #da0016;
+}

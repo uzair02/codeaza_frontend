@@ -1,0 +1,45 @@
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    background-color: #1b1b1b; 
+}
+
+.dashboard-content {
+    flex-grow: 1;
+    padding: 12px 30px;
+    background-color: #0b0b0b;
+    border-radius: 6px;
+    margin: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px; 
+    overflow-y: auto;
+    max-height: calc(100vh - 40px);
+}
+
+
+.component {
+    background-color: #28282a;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.component-summary {
+    padding-right: 20px;
+    border-radius: 8px;
+}
+
+.component-quickaccess {
+    background-color: #1b1b1b;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.component-insights {
+    background-color: #1b1b1b;
+    height: 200px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

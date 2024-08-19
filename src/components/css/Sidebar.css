@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap');
+
+.sidebar {
+    width: 225px;
+    background-color: #1b1b1b;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.profile h2 {
+    margin-top: 10px;
+    color: #FFD700;
+    font-size: 15px;
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav ul li {
+    margin-bottom: 1px;
+}
+
+.nav-link {
+    color: #FFFFFF;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px; 
+    border-radius: 6px;
+    transition: background-color 0.3s, border 0.3s, color 0.3s;
+    border: none;
+    width: 99%;
+    margin: 0 auto; 
+}
+
+.nav-link .icon {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.nav-link:hover {
+    color: rgb(121, 118, 118);
+    background-color: #373737;
+}
+
+.nav-link.active {
+    color: #00FFD1;
+    border: 1px solid #2e2e31;
+    border-radius: 6px;
+    background-color: #28282a;
+}
+
+.brand {
+    margin-top: auto;
+    text-align: center;
+    color: #FFD700;
+}
+
+.brand h3 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 20px;
+}

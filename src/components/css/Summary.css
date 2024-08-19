@@ -1,0 +1,148 @@
+.summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Space between the two sections */
+    padding: 0; /* Remove extra padding around the summary */
+}
+
+.summary .general-summary,
+.summary .recent-expenses {
+    background-color: #1b1b1b; /* Background color */
+    padding: 8px; /* Reduce padding */
+    border-radius: 8px;
+}
+
+.summary .general-summary {
+    flex: 0 0 42%; /* 42% width */
+}
+
+.summary .recent-expenses {
+    flex: 0 0 58%; /* 58% width */
+}
+
+.summary .recent-expenses table thead tr th {
+    color: #c2bfb3;
+    font-weight: bold;
+}
+
+.summary h3 {
+    margin-top: 0;
+    color: #FCFCFC;
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid #242424; /* Simple white underline */
+    padding-bottom: 3px; /* Reduce space under the heading */
+    margin-bottom: 5px; /* Reduced margin below heading */
+}
+
+.summary ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: #C4C4C4;
+    font-size: 11px;
+}
+
+.summary ul li {
+    display: flex;
+    align-items: center;
+    margin: 7px 0; /* Increased space between records */
+}
+
+.summary-icon {
+    margin-right: 8px; /* Reduced margin around icons */
+    color: #a36ef4; /* Icon color */
+    font-size: 15px;
+}
+
+.summary ul li .text {
+    flex: 1; /* Take up available space to align text with icons */
+}
+
+.summary ul li .amount {
+    text-align: right;
+    color: #fff;
+    font-weight: bold;
+}
+
+.recent-expenses table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1b1b1b; /* Background color */
+    color: #C4C4C4;
+    font-size: 11px; /* Smaller font size for table */
+}
+
+.recent-expenses table th,
+.recent-expenses table td {
+    padding: 4px; /* Reduce padding to make rows more compact */
+    text-align: left;
+    padding-bottom: 0;
+    color: #707070;
+}
+
+.recent-expenses table th {
+    color: #fff;
+    font-weight: bold; /* Make table headings bold */
+    border-bottom: none; /* Remove underline from table headers */
+    margin-bottom: 2px; /* Reduce space above headings */
+}
+
+.recent-expenses table td {
+    border-bottom: none; /* Remove underline from table data */
+}
+
+/* Target the last column in each table row to change the amount color */
+.recent-expenses table td:last-child {
+    color: #dadada; /* Set amount color to #dadada */
+    font-weight: bold;
+}
+
+.recent-expenses table tr {
+    height: 20px; /* Set a fixed height for table rows to reduce the overall height */
+}
+
+/* Category specific styling */
+.marketing-category,
+.sales-category,
+.operations-category,
+.finance-category {
+    width: 73px; /* Set a fixed width */
+    padding: 4px 6px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+    display: inline-block; /* Ensure the background wraps the content */
+    white-space: nowrap; /* Prevent text wrapping */
+    font-size: 10px;
+}
+
+.marketing-category {
+    background-color: #222255;
+    color: #9b7fd3 !important; /* Text color */
+}
+
+.sales-category {
+    background-color: #682c2b;
+    color: #b20f1d !important; /* Text color */
+}
+
+.operations-category {
+    background-color: #6f2751;
+    color: #c92183 !important; /* Text color */
+}
+
+.finance-category {
+    background-color: #124241;
+    color: #05b0a2 !important; /* Text color */
+}
+
+/* Additional CSS for table cell alignment */
+.recent-expenses table td {
+    vertical-align: middle; /* Ensure content is vertically centered */
+}
+
+.recent-expenses table td.category-cell {
+    text-align: center; /* Center the category text horizontally */
+    padding: 1px 0; /* Adjust padding for better height */
+}
