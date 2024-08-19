@@ -1,0 +1,294 @@
+.expenses-page-container {
+    display: flex;
+    height: 100vh;
+    background-color: #1b1b1b;
+
+}
+
+.expenses-content {
+    flex-grow: 1;
+    background-color: #0b0b0b;
+    border-radius: 6px;
+    margin: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    max-height: calc(100vh - 40px);
+    padding: 27px 30px;
+    gap: 10px;
+}
+
+.expenses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.expenses-title {
+    color: #fff;
+    font-size: 38px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.header-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100%;
+    gap: 20px;
+
+}
+
+.export-btn {
+
+    background-color: #fbc02d;
+    width: 140px;
+    height: 29px;
+    color: #000;
+    border: none;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-right: 10px;
+}
+
+.grouped-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.new-expense-btn {
+    background-color: #fbc02d;
+    width: 140px;
+    height: 29px;
+    color: #000;
+    border: none;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+
+}
+
+.export-btn:hover,
+.new-expense-btn:hover {
+    background-color: #FFC107;
+    transform: scale(1.05);
+}
+
+.extra-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.filter-btn,
+.options-btn,
+.more-btn {
+    background-color: #272625;
+    height: 29px;
+    color: #000;
+    border: none;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.filter-btn:hover,
+.options-btn:hover,
+.more-btn:hover {
+    background-color: #272625;
+    transform: scale(1.05);
+}
+
+.download-icon {
+    margin-right: 4px;
+    font-size: 20px;
+}
+
+.icon {
+    color: #00e5ff;
+}
+
+.expenses-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 3px;
+    color: white;
+}
+
+.expenses-table th {
+    padding: 8px;
+    padding-left: 11px;
+    text-align: left;
+    color: #888;
+    font-weight: normal;
+    border-top: 1px solid #444;
+    font-size: 14px;
+}
+
+.expenses-table td {
+    padding: 13px 11px;
+    font-size: 12px;
+    background-color: #1e1e1e;
+}
+
+
+.checkbox-header input[type="checkbox"],
+.checkbox input[type="checkbox"] {
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: #474444;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.checkbox-header input[type="checkbox"]:checked,
+.checkbox input[type="checkbox"]:checked {
+    background-color: #474849;
+    border-color: #007bff;
+}
+
+.checkbox-header input[type="checkbox"]::after,
+.checkbox input[type="checkbox"]::after {
+    content: '';
+    position: absolute;
+    display: none;
+    width: 7px;
+    height: 5px;
+    top: 4px;
+    left: 4px;
+    border: solid rgb(24, 142, 75);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-header input[type="checkbox"]:checked::after,
+.checkbox input[type="checkbox"]:checked::after {
+    display: block;
+}
+
+
+
+.expenses-table tr:hover td {
+    background-color: #292929;
+}
+
+.expenses-table tr:nth-child(even) td {
+    background-color: #28282A;
+}
+
+.expenses-table tr:nth-child(odd) td {
+    background-color: #1B1B1B;
+}
+
+
+
+.category-icon {
+    display: inline-block;
+    width: 29px;
+    height: 26px;
+    margin-right: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.date {
+    font-size: 0.75rem;
+    color: gray;
+    margin-bottom: 4px;
+}
+
+.category-container {
+    display: flex;
+    align-items: center;
+
+}
+
+.category-name {
+    font-size: 1rem;
+    font-size: 12px;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.text-container .date,
+.text-container .category-name {
+    margin: 0;
+    padding: 0;
+}
+
+
+.year-badge {
+    padding: 5px 30px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    width: auto;
+    min-width: 80px;
+    text-align: center;
+}
+
+
+.year-2024 {
+    background-color: #ff69b4;
+}
+
+.year-2023 {
+    background-color: #8a2be2;
+}
+
+/* Specific styles for category icons */
+.food-catering {
+    background-color: #4CAF50;
+}
+
+.office-supplies {
+    background-color: #FFC107;
+}
+
+.business-lunch {
+    background-color: #2196F3;
+}
+
+.travel-expenses {
+    background-color: #9C27B0;
+}
+
+.client-dinner {
+    background-color: #FF5722;
+}
+
+.accommodation {
+    background-color: #795548;
+}
+
+.news-subscription {
+    background-color: #607D8B;
+}
