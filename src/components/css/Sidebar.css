@@ -53,20 +53,29 @@
 }
 
 .nav-link .icon {
+    color: #FFFFFF;
     margin-right: 10px;
     font-size: 20px;
+    transition: color 0.3s;
 }
-
 .nav-link:hover {
     color: rgb(121, 118, 118);
     background-color: #373737;
 }
 
+.nav-link:hover .icon {
+    color: rgb(121, 118, 118); 
+}
+
 .nav-link.active {
-    color: #00FFD1;
+    color: #00e5ff;
     border: 1px solid #2e2e31;
     border-radius: 6px;
     background-color: #28282a;
+}
+
+.nav-link.active .icon {
+    color: #00e5ff;
 }
 
 .brand {
