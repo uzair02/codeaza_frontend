@@ -6,13 +6,13 @@
 
 .dashboard-content {
     flex-grow: 1;
-    padding: 12px 30px;
+    padding: 25px 30px;
     background-color: #0b0b0b;
     border-radius: 6px;
-    margin: 20px 15px;
+    margin: 28px 20px;
     display: flex;
     flex-direction: column;
-    gap: 13px; 
+    gap: 17px; 
     overflow-y: auto;
     max-height: calc(100vh - 40px);
 }
@@ -39,7 +39,12 @@
 
 .component-insights {
     background-color: #1b1b1b;
-    height: 200px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .component-summary {
+        padding-right: 0;
+    }
 }

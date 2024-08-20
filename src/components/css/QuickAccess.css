@@ -1,7 +1,6 @@
 .quick-access {
     background-color: #1b1b1b;
-    padding-bottom: 4px;
-    /* Add padding to ensure spacing */
+    padding: 0 20px 5px; /* Add padding on left and right for equal spacing */
 }
 
 .quick-access h3 {
@@ -9,7 +8,6 @@
     font-size: 12px;
     color: #FCFCFC;
     border-bottom: 1px solid #242424;
-    /* Line color */
     padding-bottom: 5px;
     margin-bottom: 10px;
 }
@@ -17,30 +15,27 @@
 .quick-access .buttons {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
-    /* Adjusted space between buttons */
+    gap: 50px; /* Increase gap between buttons */
+    flex-wrap: wrap; /* Allow wrapping to the next line */
 }
 
 .quick-access .buttons button {
     background-color: #28282a;
-    /* Updated background color */
     color: #f0f0f1;
     padding: 12px 18px;
-    /* Reduced padding */
     border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s;
     display: flex;
     align-items: center;
+    justify-content: center;
     font-size: 12px;
     font-weight: bold;
+    height: 55px;
     gap: 8px;
-    /* Space between icon and text */
     flex: 1;
-    /* Allows buttons to grow and fill available space */
-    margin: 0 20px;
-    /* Space on left and right of each button */
+    text-align: center;
 }
 
 .quick-access .buttons button:hover {
@@ -52,12 +47,9 @@
     align-items: center;
     justify-content: center;
     width: 25px;
-    /* Size of the icon circle */
     height: 25px;
-    /* Size of the icon circle */
     border-radius: 50%;
-    margin-right: 5px;
-    /* Space between icon and text */
+    margin-right: 7px;
 }
 
 .quick-access .buttons .icon-container.icon1 {
@@ -78,12 +70,9 @@
 
 .quick-access .buttons .icon {
     font-size: 10px;
-    /* Smaller icon size */
     color: #fff;
-    /* Default color */
 }
 
-/* Specific icon colors */
 .quick-access .buttons .icon-container.icon1 .icon {
     color: #d02187;
 }
@@ -100,6 +89,13 @@
     color: #da0016;
 }
 
-.new-expense {
-    text-decoration: none;
+@media (max-width: 768px) {
+    .quick-access .buttons {
+        flex-direction: column;
+        gap: 15px; 
+    }
+
+    .quick-access .buttons button {
+        margin: 0;
+    }
 }
