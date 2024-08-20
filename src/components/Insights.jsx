@@ -55,7 +55,7 @@ function Insights() {
               domainPadding={{ x: 40 }}
               padding={{ top: 10, bottom: 25, left: 30, right: 10 }}
               height={135}
-              width={495}
+              width={470}
             >
               <VictoryAxis
                 style={{
@@ -96,7 +96,7 @@ function Insights() {
               domainPadding={{ x: 40 }}
               padding={{ top: 10, bottom: 25, left: 30, right: 10 }}
               height={135}
-              width={495}
+              width={470}
             >
               <VictoryAxis
                 style={{
