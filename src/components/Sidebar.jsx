@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Dp from '../assets/profile.png';
+import Dp from '../assets/profile.jpg';
 import { FaHome, FaRegCreditCard  } from 'react-icons/fa';
 import './css/Sidebar.css';
 
