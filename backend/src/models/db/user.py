@@ -1,8 +1,9 @@
 import uuid
 
-from repository.database import Base
 from sqlalchemy import Boolean, Column, String
 from sqlalchemy.dialects.postgresql import UUID
+
+from repository.database import Base
 
 
 class User(Base):

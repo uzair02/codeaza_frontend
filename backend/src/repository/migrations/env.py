@@ -2,16 +2,15 @@ import os
 import sys
 
 # Get the directory path two levels up (the root of the 'backend' folder)
-sys.path.append(
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "src")
-)
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "src"))
 from logging.config import fileConfig
 
 from alembic import context
+from sqlalchemy import pool
+
 from config.settings.base import config_env, create_engine
 from models.db.user import User
 from repository.database import Base
-from sqlalchemy import pool
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

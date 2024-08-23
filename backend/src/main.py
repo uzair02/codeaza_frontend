@@ -1,63 +1,57 @@
-"""
-Main application entry point for the FastAPI application.
-
-This module sets up the FastAPI application, configures middleware,
-and includes routes for handling transactions.
-
-Imports:
-    FastAPI: The FastAPI framework for creating the application instance.
-    CORSMiddleware: Middleware for handling Cross-Origin Resource Sharing (CORS).
-    transaction_controller: Module that contains transaction-related routes.
-
-Usage:
-    This module should be run to start the FastAPI application server.
-    It sets up the necessary middleware and includes the transaction routes.
-"""
+import uvicorn
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from api.endpoints import router as api_endpoint_routers
+from config.settings.base import config_env
 from config.settings.logger_config import logger
-from fastapi import FastAPI
 from repository.database import Base, engine
 
-app = FastAPI()
-# Initialize logger
-# logger = get_logger()
+
+# Function to initialize the FastAPI application
+def initialize_backend_application() -> FastAPI:
+    app = FastAPI()
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=config_env.ALLOWED_ORIGINS,
+        allow_credentials=config_env.IS_ALLOWED_CREDENTIALS,
+        allow_methods=config_env.ALLOWED_METHODS,
+        allow_headers=config_env.ALLOWED_HEADERS,
+    )
+    app.include_router(router=api_endpoint_routers)
+
+    @app.on_event("startup")
+    async def startup_event():
+        """
+        Function for application startup log and database initialization
+        """
+        logger.info("Application startup")
+        await create_tables()
+
+    @app.on_event("shutdown")
+    async def shutdown_event():
+        """
+        Function for application shutdown log
+        """
+        logger.info("Application shutdown")
+
+    return app
 
 
-# # allowing application on this port to interact with fastapi
-# origins = [
-#     "http://localhost:5173",
-#     # 'https://transactionmanagement.netlify.app/'
-# ]
-
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=origins,
-#     allow_credentials=True,
-#     allow_methods=["GET", "POST", "PUT", "DELETE"],
-#     allow_headers=["*"],
-# )
-
-app.include_router(router=api_endpoint_routers)
+# Define app as backend_app to match your boss's naming convention
+backend_app: FastAPI = initialize_backend_application()
 
 
+# Function to create the database tables
 async def create_tables():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
 
-@app.on_event("startup")
-async def startup_event():
-    """
-    function for application startup log
-    """
-    logger.info("Application startup")
-    await create_tables()
-
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    """
-    function for application shutdown log
-    """
-    logger.info("Application shutdown")
+if __name__ == "__main__":
+    uvicorn.run(
+        app="main:backend_app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True,  # Add this if you want automatic reload on code changes
+    )

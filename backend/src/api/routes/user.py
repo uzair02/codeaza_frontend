@@ -1,12 +1,12 @@
-from config.settings.logger_config import logger
 from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+
+from config.settings.logger_config import logger
 from models.schemas.error_response import ErrorResponse
-from models.schemas.user import Token, UserCreate, UserLogin
-from models.schemas.user import User as UserSchema
+from models.schemas.user import Token, User as UserSchema, UserCreate, UserLogin
 from repository.crud.user import authenticate_user, create_user
 from repository.database import get_db
 from securities.authorization.jwt import create_access_token
-from sqlalchemy.orm import Session
 from utilities.constants import ErrorMessages
 
 router = APIRouter()
@@ -57,9 +57,7 @@ async def register_user(user: UserCreate, db: Session = Depends(get_db)) -> User
         500: {"model": ErrorResponse},
     },
 )
-async def login(
-    form_data: UserLogin = Depends(), db: Session = Depends(get_db)
-) -> Token:
+async def login(form_data: UserLogin = Depends(), db: Session = Depends(get_db)) -> Token:
     """
     Authenticate a user and provide an access token.
 

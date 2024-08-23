@@ -1,9 +1,10 @@
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
+
 from config.settings.logger_config import logger
 from models.db.user import User as UserModel
 from models.schemas.user import UserCreate
 from securities.hashing.hash import get_password_hash, verify_password
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
 
 
 async def create_user(db: AsyncSession, user: UserCreate) -> UserModel:
@@ -22,9 +23,7 @@ async def create_user(db: AsyncSession, user: UserCreate) -> UserModel:
     """
     try:
         # Check if the username already exists
-        existing_user = await db.execute(
-            select(UserModel).where(UserModel.username == user.username)
-        )
+        existing_user = await db.execute(select(UserModel).where(UserModel.username == user.username))
         if existing_user.scalar_one_or_none():
             raise ValueError("Username already registered")
 

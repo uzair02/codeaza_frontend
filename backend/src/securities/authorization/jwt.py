@@ -1,8 +1,9 @@
 from datetime import datetime, timedelta
 
+from jose import jwt
+
 from config.settings.base import config_env
 from config.settings.logger_config import logger
-from jose import jwt
 
 
 async def create_access_token(data: dict) -> str:
@@ -17,13 +18,9 @@ async def create_access_token(data: dict) -> str:
     """
     try:
         to_encode = data.copy()
-        expire = datetime.utcnow() + timedelta(
-            minutes=config_env.ACCESS_TOKEN_EXPIRE_MINUTES
-        )
+        expire = datetime.utcnow() + timedelta(minutes=config_env.ACCESS_TOKEN_EXPIRE_MINUTES)
         to_encode.update({"exp": expire})
-        encoded_jwt = jwt.encode(
-            to_encode, config_env.SECRET_KEY, algorithm=config_env.ALGORITHM
-        )
+        encoded_jwt = jwt.encode(to_encode, config_env.SECRET_KEY, algorithm=config_env.ALGORITHM)
         logger.info("Access token created successfully")
         return encoded_jwt
     except Exception as e:
