@@ -9,7 +9,7 @@ class ErrorResponse(BaseModel):
     """
     Base Pydantic model for defining Error data
     Attributes:
-        deatil will provide the description about the error
+        detail will provide the description about the error
         status code will provide the error status code
     """
 

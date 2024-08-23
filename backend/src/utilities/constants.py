@@ -24,4 +24,4 @@ class ErrorMessages(Enum):
     TRANSACTION_NOT_FOUND = "Transaction not Found"
     ERROR_CREATING_USER = "User already exists"
     INVALID_CREDENTIALS = "Credentials are invalid"
-    ERROR_LOGGING_IN = "Error loggin in"
+    ERROR_LOGGING_IN = "Error logging in"
