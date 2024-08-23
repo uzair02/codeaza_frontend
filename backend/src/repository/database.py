@@ -1,41 +1,21 @@
-import pydantic
-from sqlalchemy.ext.asyncio import (
-    AsyncEngine as SQLAlchemyAsyncEngine,
-    AsyncSession as SQLAlchemyAsyncSession,
-    create_async_engine as create_sqlalchemy_async_engine,
+from config.settings.base import config_env
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
+
+engine = create_async_engine(
+    config_env.database_url.replace("postgresql://", "postgresql+asyncpg://"),
+    echo=True,  # Set to False in production to avoid logging SQL queries
 )
-from sqlalchemy.pool import Pool as SQLAlchemyPool, QueuePool as SQLAlchemyQueuePool
-
-from src.config.manager import settings
-
-
-class AsyncDatabase:
-    def __init__(self):
-        self.postgres_uri: pydantic.PostgresDsn = pydantic.PostgresDsn(
-            url=f"{settings.DB_POSTGRES_SCHEMA}://{settings.DB_POSTGRES_NAME}:{settings.DB_POSTGRES_PASSWORD}@{settings.DB_POSTGRES_HOST}:{settings.DB_POSTGRES_PORT}/{settings.DB_POSTGRES_NAME}",
-        )
-        self.async_engine: SQLAlchemyAsyncEngine = create_sqlalchemy_async_engine(
-            url=self.set_async_db_uri,
-            echo=settings.IS_DB_ECHO_LOG,
-            pool_size=settings.DB_POOL_SIZE,
-            max_overflow=settings.DB_POOL_OVERFLOW,
-            poolclass=SQLAlchemyQueuePool,
-        )
-        self.async_session: SQLAlchemyAsyncSession = SQLAlchemyAsyncSession(bind=self.async_engine)
-        self.pool: SQLAlchemyPool = self.async_engine.pool
-
-    @property
-    def set_async_db_uri(self) -> str | pydantic.PostgresDsn:
-        """
-        Set the synchronous database driver into asynchronous version by utilizing AsyncPG:
-
-            `postgresql://` => `postgresql+asyncpg://`
-        """
-        return (
-            str(self.postgres_uri).replace("postgresql://", "postgresql+asyncpg://")
-            if self.postgres_uri
-            else self.postgres_uri
-        )
+Base = declarative_base()
+AsyncSessionLocal = sessionmaker(
+    bind=engine, class_=AsyncSession, expire_on_commit=False
+)
 
 
-async_db: AsyncDatabase = AsyncDatabase()
+# Dependency that will be used in the FastAPI routes to get a database session
+async def get_db():
+    async with AsyncSessionLocal() as session:
+        try:
+            yield session
+        finally:
+            await session.close()
