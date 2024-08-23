@@ -1,45 +1,33 @@
+from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
 
-from src.config.manager import settings
+# Password hashing context
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 
-class HashGenerator:
-    def __init__(self):
-        self._hash_ctx_layer_1: CryptContext = CryptContext(
-            schemes=[settings.HASHING_ALGORITHM_LAYER_1], deprecated="auto"
-        )
-        self._hash_ctx_layer_2: CryptContext = CryptContext(
-            schemes=[settings.HASHING_ALGORITHM_LAYER_2], deprecated="auto"
-        )
-        self._hash_ctx_salt: str = settings.HASHING_SALT
+async def verify_password(plain_password: str, hashed_password: str) -> bool:
+    """
+    Verifies if the provided plain password matches the hashed password.
 
-    @property
-    def _get_hashing_salt(self) -> str:
-        return self._hash_ctx_salt
+    Args:
+        plain_password (str): The plain text password.
+        hashed_password (str): The hashed password stored in the database.
 
-    @property
-    def generate_password_salt_hash(self) -> str:
-        """
-        A function to generate a hash from Bcrypt to append to the user password.
-        """
-        return self._hash_ctx_layer_1.hash(secret=self._get_hashing_salt)
-
-    def generate_password_hash(self, hash_salt: str, password: str) -> str:
-        """
-        A function that adds the user's password with the layer 1 Bcrypt hash, before
-        hash it for the second time using Argon2 algorithm.
-        """
-        return self._hash_ctx_layer_2.hash(secret=hash_salt + password)
-
-    def is_password_verified(self, password: str, hashed_password: str) -> bool:
-        """
-        A function that decodes users' password and verifies whether it is the correct password.
-        """
-        return self._hash_ctx_layer_2.verify(secret=password, hash=hashed_password)
+    Returns:
+        bool: True if the passwords match, otherwise False.
+    """
+    return pwd_context.verify(plain_password, hashed_password)
 
 
-def get_hash_generator() -> HashGenerator:
-    return HashGenerator()
+async def get_password_hash(password: str) -> str:
+    """
+    Hashes the provided password using bcrypt.
 
+    Args:
+        password (str): The plain text password to hash.
 
-hash_generator: HashGenerator = get_hash_generator()
+    Returns:
+        str: The hashed password.
+    """
+    return pwd_context.hash(password)
