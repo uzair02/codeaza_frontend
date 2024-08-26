@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 from config.settings.logger_config import logger
+from models.schemas.auth_schema import Token
 from models.schemas.error_response import ErrorResponse
-from models.schemas.user import Token, User as UserSchema, UserCreate, UserLogin
+from models.schemas.user import User as UserSchema, UserCreate
 from repository.crud.user import authenticate_user, create_user
 from repository.database import get_db
 from securities.authorization.jwt import create_access_token
@@ -36,7 +38,7 @@ async def register_user(user: UserCreate, db: Session = Depends(get_db)) -> User
     try:
         logger.info(f"Attempting to register user with username: {user.username}")
         db_user = await create_user(db, user)
-        logger.info(f"User registered successfully with ID: {db_user.id}")
+        logger.info(f"User registered successfully with ID: {db_user.user_id}")
         return UserSchema.from_orm(db_user)
     except Exception as e:
         logger.error(f"Unexpected error during user registration: {e}")
@@ -57,23 +59,23 @@ async def register_user(user: UserCreate, db: Session = Depends(get_db)) -> User
         500: {"model": ErrorResponse},
     },
 )
-async def login(form_data: UserLogin = Depends(), db: Session = Depends(get_db)) -> Token:
+async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)) -> Token:
     """
     Authenticate a user and provide an access token.
 
     Args:
-        form_data (UserLogin): The form data containing only the password.
-        db (Session): The database session.
+        form_data (OAuth2PasswordRequestForm): The form data containing username and password for authentication.
+        db (Session): The database session used to validate user credentials.
 
     Returns:
-        Token: The access token for authenticated user.
+        Token: A JWT access token for the authenticated user.
 
     Raises:
-        HTTPException: If authentication fails.
+        HTTPException: If authentication fails due to invalid credentials or other errors.
     """
     try:
         logger.info("Attempting to authenticate user ")
-        user = await authenticate_user(db, form_data.password)
+        user = await authenticate_user(db, form_data.username, form_data.password)
 
         if not user:
             logger.warning("Invalid credentials provided")
