@@ -1,8 +1,12 @@
 import os
 import sys
 
-# Get the directory path two levels up (the root of the 'backend' folder)
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "src"))
+# added project root path
+app_root = os.getenv(
+    "APP_ROOT",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "src"),
+)
+sys.path.append(app_root)
 from logging.config import fileConfig
 
 from alembic import context
