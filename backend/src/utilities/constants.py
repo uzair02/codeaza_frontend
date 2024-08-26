@@ -1,27 +1,16 @@
-"""
-Importing the Enum class from the enum module.
-
-This import is used to define enumeration classes that provide a set of symbolic names
-(bound to unique, constant values) for use in the application. Enumerations are useful
-for defining sets of related constants and improving code readability.
-
-Usage:
-    This module import is used in defining error message constants, configuration options,
-    and other sets of named values.
-"""
-
 from enum import Enum
 
 
 class ErrorMessages(Enum):
     """
-    Enumeration for standardized error messages used throughout the application.
+    Enum class to define common error messages used throughout the application.
 
     Attributes:
-        TRANSACTION_NOT_FOUND (str): Error message indicating that a requested transaction was not found.
+        ERROR_CREATING_USER (str): Message indicating that there was an error creating a user, typically because the username already exists.
+        INVALID_CREDENTIALS (str): Message indicating that the provided credentials are invalid.
+        ERROR_LOGGING_IN (str): Message indicating that an error occurred during the login process.
     """
 
-    TRANSACTION_NOT_FOUND = "Transaction not Found"
-    ERROR_CREATING_USER = "User already exists"
+    ERROR_CREATING_USER = "Username already exists"
     INVALID_CREDENTIALS = "Credentials are invalid"
     ERROR_LOGGING_IN = "Error logging in"
