@@ -22,6 +22,7 @@ services:
     container_name: db_editor
     restart: always
     environment:
+      - APP_ROOT=/app/src
       - POSTGRES_USER=${POSTGRES_USERNAME}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_HOST=${POSTGRES_HOST}
