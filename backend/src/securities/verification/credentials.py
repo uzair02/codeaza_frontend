@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from config.settings.base import config
 from models.db.user import User
-from models.schemas.user import TokenData
+from models.schemas.auth_schema import TokenData
 from repository.database import get_db
 
 
