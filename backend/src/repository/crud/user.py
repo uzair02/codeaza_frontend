@@ -1,3 +1,5 @@
+from typing import Optional
+
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
@@ -19,22 +21,9 @@ async def create_user(db: AsyncSession, user: UserCreate) -> UserModel:
         UserModel: The created user object.
 
     Raises:
-        ValueError: If the username already exists or the password is already in use.
+        ValueError: If the username already exists.
     """
     try:
-        # Check if the username already exists
-        existing_user = await db.execute(select(UserModel).where(UserModel.username == user.username))
-        if existing_user.scalar_one_or_none():
-            raise ValueError("Username already registered")
-
-        # Check if the password is already in use
-        result = await db.execute(select(UserModel))
-        all_users = result.scalars().all()
-
-        for db_user in all_users:
-            if await verify_password(user.password, db_user.hashed_password):
-                raise ValueError("Password already in use by another user")
-
         hashed_password = await get_password_hash(user.password)
         db_user = UserModel(username=user.username, hashed_password=hashed_password)
         db.add(db_user)
@@ -44,35 +33,34 @@ async def create_user(db: AsyncSession, user: UserCreate) -> UserModel:
         return db_user
 
     except Exception as e:
-        await db.rollback()
         logger.error(f"Error creating user: {e}")
         raise
 
 
-async def authenticate_user(db: AsyncSession, password: str) -> UserModel:
+async def authenticate_user(db: AsyncSession, username: str, password: str) -> Optional[UserModel]:
     """
-    Authenticates a user by verifying the password.
+    Authenticates a user by verifying the username and password.
 
     Args:
         db (AsyncSession): The database session.
+        username (str): The user's username.
         password (str): The user's password.
 
     Returns:
-        UserModel: The authenticated user object, or None if authentication fails.
+        Optional[UserModel]: The authenticated user object, or None if authentication fails.
     """
     try:
-        # Assuming only one user or a specific mechanism for handling this scenario
-        stmt = select(UserModel)
+        # Query the database for the user with the provided username
+        stmt = select(UserModel).filter(UserModel.username == username)
         result = await db.execute(stmt)
-        users = result.scalars().all()
+        user = result.scalar_one_or_none()  # Fetch a single user or None
 
-        for user in users:
-            if await verify_password(password, user.hashed_password):
-                logger.info("User authenticated successfully")
-                return user
+        if user is None or not await verify_password(password, user.hashed_password):
+            logger.warning(f"Authentication failed for username: {username}")
+            return None
 
-        logger.warning("Authentication failed: Invalid password.")
-        return None
+        logger.info(f"User authenticated successfully with username: {username}")
+        return user
 
     except Exception as e:
         logger.error(f"Error during user authentication: {e}")
