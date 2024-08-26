@@ -8,6 +8,8 @@ WORKDIR /usr/backend
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV VIRTUAL_ENV=/opt/venv
+#env variable for pointing to the src directory
+ENV APP_ROOT=/app/src
 
 # Switch on virtual environment
 RUN python3 -m venv $VIRTUAL_ENV
