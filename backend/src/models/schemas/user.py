@@ -11,8 +11,6 @@ Imports:
     - Optional from typing for defining optional fields.
 """
 
-from typing import Optional
-
 from pydantic import BaseModel, UUID4
 
 
@@ -39,18 +37,6 @@ class UserCreate(UserBase):
     password: str
 
 
-class UserLogin(BaseModel):
-    """
-    Schema for user login.
-
-    Attributes:
-        username (str): The username of the user.
-        password (str): The password for the user account.
-    """
-
-    password: str
-
-
 class User(UserBase):
     """
     Schema for a user profile, extending the base user schema.
@@ -60,7 +46,7 @@ class User(UserBase):
         is_active (bool): Indicates whether the user account is active.
     """
 
-    id: UUID4
+    user_id: UUID4
     is_active: bool
 
     class Config:
@@ -72,28 +58,3 @@ class User(UserBase):
         """
 
         from_attributes = True
-
-
-class Token(BaseModel):
-    """
-    Schema for an authentication token.
-
-    Attributes:
-        access_token (str): The JWT access token issued to the user.
-        token_type (str): The type of the token, typically 'bearer'.
-    """
-
-    access_token: str
-    token_type: str
-
-
-class TokenData(BaseModel):
-    """
-    Schema for the data contained within an authentication token.
-
-    Attributes:
-        username (Optional[str]): The username associated with the token.
-                                  This field is optional and defaults to None.
-    """
-
-    username: Optional[str] = None
