@@ -11,6 +11,8 @@ Imports:
     - Optional from typing for defining optional fields.
 """
 
+from datetime import datetime
+
 from pydantic import BaseModel, UUID4
 
 
@@ -48,6 +50,7 @@ class User(UserBase):
 
     user_id: UUID4
     is_active: bool
+    timestamp: datetime
 
     class Config:
         """
