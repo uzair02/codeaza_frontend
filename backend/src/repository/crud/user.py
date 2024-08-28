@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Optional
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -25,7 +26,11 @@ async def create_user(db: AsyncSession, user: UserCreate) -> UserModel:
     """
     try:
         hashed_password = await get_password_hash(user.password)
-        db_user = UserModel(username=user.username, hashed_password=hashed_password)
+        db_user = UserModel(
+            username=user.username,
+            hashed_password=hashed_password,
+            timestamp=datetime.utcnow(),  # Set the timestamp
+        )
         db.add(db_user)
         await db.commit()
         await db.refresh(db_user)
