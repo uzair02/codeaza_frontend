@@ -14,11 +14,13 @@ from sqlalchemy import pool
 
 from config.settings.base import config_env, create_engine
 from models.db.user import User
+from models.db.user_logs import Log
 from repository.database import Base
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 user = User
+log = Log
 config = context.config
 DATABASE_URL = config_env.database_url
 # Interpret the config file for Python logging.

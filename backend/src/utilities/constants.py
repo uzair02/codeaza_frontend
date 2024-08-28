@@ -14,3 +14,7 @@ class ErrorMessages(Enum):
     ERROR_CREATING_USER = "Username already exists"
     INVALID_CREDENTIALS = "Credentials are invalid"
     ERROR_LOGGING_IN = "Error logging in"
+    ERROR_CREATING_LOG = "Error creating log"
+    ERROR_UPDATING_LOG = "Error updating the log"
+    ERROR_DELETING_LOG = "Error deleting log"
+    ERROR_RETRIEVING_LOGS = "Error retrieving logs"
