@@ -1,18 +1,18 @@
 .dashboard-container {
     display: flex;
     height: 100vh;
-    background-color: #1b1b1b; 
+    background-color: #1b1b1b;
 }
 
 .dashboard-content {
     flex-grow: 1;
-    padding: 25px 30px;
+    padding: 27px 30px;
     background-color: #0b0b0b;
     border-radius: 6px;
-    margin: 28px 20px;
+    margin: 20px 15px;
     display: flex;
     flex-direction: column;
-    gap: 17px; 
+    gap: 17px;
     overflow-y: auto;
     max-height: calc(100vh - 40px);
 }
