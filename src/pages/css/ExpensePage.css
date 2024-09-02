@@ -1,13 +1,43 @@
+:root {
+    --background-color: #1b1b1b;
+    --content-background: #0b0b0b;
+    --header-title-color: #fff;
+    --button-background: #fbc02d;
+    --button-text-color: #000;
+    --button-hover-transform: scale(1.05);
+    --extra-button-background: #272625;
+    --icon-color: #00e5ff;
+    --table-header-color: #888;
+    --table-border-top: #444;
+    --table-cell-background: #1e1e1e;
+    --checkbox-border-color: #474444;
+    --checkbox-background-color: #474444;
+    --checkbox-tick-color: #00FFFF;
+    --table-row-hover-background: #292929;
+    --table-row-even-background: #28282A;
+    --table-row-odd-background: #1B1B1B;
+    --date-text-color: gray;
+    --year-2024-background: #ff69b4;
+    --year-2023-background: #8a2be2;
+    --food-catering-color: #4CAF50;
+    --office-supplies-color: #FFC107;
+    --business-lunch-color: #2196F3;
+    --travel-expenses-color: #9C27B0;
+    --client-dinner-color: #FF5722;
+    --accommodation-color: #795548;
+    --news-subscription-color: #607D8B;
+}
+
 .expenses-page-container {
     display: flex;
     height: 100vh;
-    background-color: #1b1b1b;
+    background-color: var(--background-color);
 
 }
 
 .expenses-content {
     flex-grow: 1;
-    background-color: #0b0b0b;
+    background-color: var(--content-background);
     border-radius: 6px;
     margin: 28px 20px;
     display: flex;
@@ -27,7 +57,7 @@
 }
 
 .expenses-title {
-    color: #fff;
+    color: var(--header-title-color);
     font-size: 38px;
     margin: 0;
     font-weight: bold;
@@ -59,10 +89,10 @@
 
 .export-btn {
 
-    background-color: #fbc02d;
+    background-color: var(--button-background);
     width: 140px;
     height: 29px;
-    color: #000;
+    color: var(--button-text-color);
     border: none;
     padding: 8px 12px;
     display: flex;
@@ -82,10 +112,10 @@
 }
 
 .new-expense-btn {
-    background-color: #fbc02d;
+    background-color: var(--button-background);
     width: 140px;
     height: 29px;
-    color: #000;
+    color: var(--button-text-color);
     border: none;
     padding: 8px 12px;
     display: flex;
@@ -112,9 +142,9 @@
 .filter-btn,
 .options-btn,
 .more-btn {
-    background-color: #272625;
+    background-color: var(--extra-button-background);
     height: 29px;
-    color: #000;
+    color: var(--button-text-color);
     border: none;
     padding: 8px;
     display: flex;
@@ -129,8 +159,8 @@
 .filter-btn:hover,
 .options-btn:hover,
 .more-btn:hover {
-    background-color: #272625;
-    transform: scale(1.05);
+    background-color: var(--extra-button-background);
+    transform: var(--button-hover-transform);
 }
 
 .download-icon {
@@ -139,30 +169,30 @@
 }
 
 .icon {
-    color: #00e5ff;
+    color: var(--icon-color);
 }
 
 .expenses-table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 3px;
-    color: white;
+    color: var(--header-title-color);
 }
 
 .expenses-table th {
     padding: 8px;
     padding-left: 11px;
     text-align: left;
-    color: #888;
+    color: var(--table-header-color);
     font-weight: normal;
-    border-top: 1px solid #444;
+    border-top: 1px solid var(--table-border-top);
     font-size: 14px;
 }
 
 .expenses-table td {
     padding: 13px 11px;
     font-size: 12px;
-    background-color: #1e1e1e;
+    background-color: var(--table-cell-background);
 }
 
 
@@ -171,10 +201,10 @@
     appearance: none;
     width: 15px;
     height: 15px;
-    border: 2px solid #474444;
+    border: 2px solid var(--checkbox-border-color);
     border-radius: 3px;
     cursor: pointer;
-    background-color: #474444;
+    background-color: var(--checkbox-background-color);
     position: relative;
 }
 
@@ -187,24 +217,23 @@
     left: 3px;
     width: 4px;
     height: 8px;
-    border: solid #00FFFF;
+    border: solid var(--checkbox-tick-color);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
 
 
 
-
 .expenses-table tr:hover td {
-    background-color: #292929;
+    background-color: var(--table-row-hover-background);
 }
 
 .expenses-table tr:nth-child(even) td {
-    background-color: #28282A;
+    background-color: var(--table-row-even-background);
 }
 
 .expenses-table tr:nth-child(odd) td {
-    background-color: #1B1B1B;
+    background-color: var(--table-row-odd-background);
 }
 
 
@@ -220,7 +249,7 @@
 
 .date {
     font-size: 0.75rem;
-    color: gray;
+    color: var(--date-text-color);
     margin-bottom: 4px;
 }
 
@@ -257,40 +286,39 @@
     text-align: center;
 }
 
-
 .year-2024 {
-    background-color: #ff69b4;
+    background-color: var(--year-2024-background);
 }
 
 .year-2023 {
-    background-color: #8a2be2;
+    background-color: var(--year-2023-background);
 }
 
 /* Specific styles for category icons */
 .food-catering {
-    background-color: #4CAF50;
+    background-color: var(--food-catering-color);
 }
 
 .office-supplies {
-    background-color: #FFC107;
+    background-color: var(--office-supplies-color);
 }
 
 .business-lunch {
-    background-color: #2196F3;
+    background-color: var(--business-lunch-color);
 }
 
 .travel-expenses {
-    background-color: #9C27B0;
+    background-color: var(--travel-expenses-color);
 }
 
 .client-dinner {
-    background-color: #FF5722;
+    background-color: var(--client-dinner-color);
 }
 
 .accommodation {
-    background-color: #795548;
+    background-color: var(--accommodation-color);
 }
 
 .news-subscription {
-    background-color: #607D8B;
+    background-color: var(--news-subscription-color);
 }

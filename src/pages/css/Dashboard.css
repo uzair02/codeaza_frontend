@@ -1,15 +1,24 @@
+:root {
+    --primary-bg-color: #1b1b1b;
+    --secondary-bg-color: #0b0b0b;
+    --component-bg-color: #28282a;
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
+    --border-radius-small: 6px;
+    --border-radius-medium: 8px;
+}
+
 .dashboard-container {
     display: flex;
     height: 100vh;
-    background-color: #1b1b1b;
+    background-color: var(--primary-bg-color);
 }
 
 .dashboard-content {
     flex-grow: 1;
     padding: 27px 30px;
-    background-color: #0b0b0b;
-    border-radius: 6px;
-    margin: 20px 15px;
+    background-color: var(--secondary-bg-color);
+    border-radius: var(--border-radius-small);
+    margin: 28px 20px;
     display: flex;
     flex-direction: column;
     gap: 17px;
@@ -17,30 +26,29 @@
     max-height: calc(100vh - 40px);
 }
 
-
 .component {
-    background-color: #28282a;
+    background-color: var(--component-bg-color);
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius-medium);
+    box-shadow: 0 0 10px var(--box-shadow-color);
 }
 
 .component-summary {
     padding-right: 20px;
-    border-radius: 8px;
+    border-radius: var(--border-radius-medium);
 }
 
 .component-quickaccess {
-    background-color: #1b1b1b;
+    background-color: var(--primary-bg-color);
     padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius-medium);
+    box-shadow: 0 0 10px var(--box-shadow-color);
 }
 
 .component-insights {
-    background-color: #1b1b1b;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-bg-color);
+    border-radius: var(--border-radius-medium);
+    box-shadow: 0 0 10px var(--box-shadow-color);
 }
 
 @media (max-width: 768px) {

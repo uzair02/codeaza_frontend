@@ -1,13 +1,31 @@
+:root {
+    --color-background: #1b1b1b;
+    --color-text-light: #FCFCFC;
+    --color-border: #242424;
+    --color-button-background: #28282a;
+    --color-button-text: #f0f0f1;
+    --color-button-hover: #373737;
+    --color-icon1: #6f2751;
+    --color-icon2: #222255;
+    --color-icon3: #124241;
+    --color-icon4: #682b3b;
+    --color-icon1-text: #d02187;
+    --color-icon2-text: #c09bf9;
+    --color-icon3-text: #00d7c3;
+    --color-icon4-text: #da0016;
+}
+
 .quick-access {
     background-color: #1b1b1b;
-    padding: 0 20px 5px; /* Add padding on left and right for equal spacing */
+    padding: 0 20px 5px;
+    /* Add padding on left and right for equal spacing */
 }
 
 .quick-access h3 {
     margin-top: 0;
     font-size: 12px;
-    color: #FCFCFC;
-    border-bottom: 1px solid #242424;
+    color: var(--color-text-light);
+    border-bottom: 1px solid var(--color-border);
     padding-bottom: 5px;
     margin-bottom: 10px;
 }
@@ -15,13 +33,15 @@
 .quick-access .buttons {
     display: flex;
     justify-content: space-between;
-    gap: 50px; /* Increase gap between buttons */
-    flex-wrap: wrap; /* Allow wrapping to the next line */
+    gap: 50px;
+    /* Increase gap between buttons */
+    flex-wrap: wrap;
+    /* Allow wrapping to the next line */
 }
 
 .quick-access .buttons button {
-    background-color: #28282a;
-    color: #f0f0f1;
+    background-color: var(--color-button-background);
+    color: var(--color-button-text);
     padding: 12px 18px;
     border: none;
     border-radius: 6px;
@@ -39,7 +59,7 @@
 }
 
 .quick-access .buttons button:hover {
-    background-color: #373737;
+    background-color: var(--color-button-hover);
 }
 
 .quick-access .buttons .icon-container {
@@ -53,46 +73,46 @@
 }
 
 .quick-access .buttons .icon-container.icon1 {
-    background-color: #6f2751;
+    background-color: var(--color-icon1);
 }
 
 .quick-access .buttons .icon-container.icon2 {
-    background-color: #222255;
+    background-color: var(--color-icon2);
 }
 
 .quick-access .buttons .icon-container.icon3 {
-    background-color: #124241;
+    background-color: var(--color-icon3);
 }
 
 .quick-access .buttons .icon-container.icon4 {
-    background-color: #682b3b;
+    background-color: var(--color-icon4);
 }
 
 .quick-access .buttons .icon {
-    font-size: 10px;
+    font-size: var(--font-size-x-small);
     color: #fff;
 }
 
 .quick-access .buttons .icon-container.icon1 .icon {
-    color: #d02187;
+    color: var(--color-icon1-text);
 }
 
 .quick-access .buttons .icon-container.icon2 .icon {
-    color: #c09bf9;
+    color: var(--color-icon2-text);
 }
 
 .quick-access .buttons .icon-container.icon3 .icon {
-    color: #00d7c3;
+    color: var(--color-icon3-text);
 }
 
 .quick-access .buttons .icon-container.icon4 .icon {
-    color: #da0016;
+    color: var(--color-icon4-text);
 }
 
 @media (max-width: 768px) {
     .quick-access .buttons {
         flex-direction: column;
-        gap: 15px; 
+        gap: var(--gap-between-buttons-small);
     }
 
     .quick-access .buttons button {

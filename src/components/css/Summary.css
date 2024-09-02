@@ -1,15 +1,36 @@
+:root {
+    --color-summary-background: #1b1b1b;
+    --color-summary-heading: #FCFCFC;
+    --color-summary-border: #242424;
+    --color-summary-text: #C4C4C4;
+    --color-summary-icon: #a36ef4;
+    --color-table-header: #c2bfb3;
+    --color-table-text: #707070;
+    --color-table-footer-text: #dadada;
+    --color-category-marketing: #222255;
+    --color-category-marketing-text: #9b7fd3;
+    --color-category-sales: #682c2b;
+    --color-category-sales-text: #b20f1d;
+    --color-category-operations: #6f2751;
+    --color-category-operations-text: #c92183;
+    --color-category-finance: #124241;
+    --color-category-finance-text: #05b0a2;
+    --font-size-heading: 12px;
+    --font-size-category: 10px;
+}
+
 .summary {
     display: flex;
     justify-content: space-between;
-    gap: 20px; 
-    padding: 0; 
+    gap: 20px;
+    padding: 0;
     height: 170px;
 }
 
 .summary .general-summary,
 .summary .recent-expenses {
-    background-color: #1b1b1b;
-    padding: 8px; 
+    background-color: var(--color-summary-background);
+    padding: 8px;
     border-radius: 8px;
 }
 
@@ -18,46 +39,46 @@
 }
 
 .summary .recent-expenses {
-    flex: 0 0 58%; 
+    flex: 0 0 58%;
 }
 
 .summary .recent-expenses table thead tr th {
-    color: #c2bfb3;
+    color: var(--color-table-header);
     font-weight: bold;
 }
 
 .summary h3 {
     margin-top: 0;
-    color: #FCFCFC;
-    font-size: 12px;
+    color: var(--color-summary-heading);
+    font-size: var(--font-size-heading);
     font-weight: bold;
-    border-bottom: 1px solid #242424; 
-    padding-bottom: 3px; 
-    margin-bottom: 5px; 
+    border-bottom: 1px solid var(--color-summary-border);
+    padding-bottom: 3px;
+    margin-bottom: 5px;
 }
 
 .summary ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    color: #C4C4C4;
+    color: var(--color-summary-text);
     font-size: 11px;
 }
 
 .summary ul li {
     display: flex;
     align-items: center;
-    margin: 10px 10px; 
+    margin: 10px 10px;
 }
 
 .summary-icon {
-    margin-right: 8px; 
-    color: #a36ef4; 
+    margin-right: 8px;
+    color: var(--color-summary-icon);
     font-size: 15px;
 }
 
 .summary ul li .text {
-    flex: 1; 
+    flex: 1;
 }
 
 .summary ul li .amount {
@@ -69,8 +90,8 @@
 .recent-expenses table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #1b1b1b; 
-    color: #C4C4C4;
+    background-color: var(--color-summary-background);
+    color: var(--color-summary-text);
     font-size: 11px;
 }
 
@@ -79,12 +100,12 @@
     padding: 4px;
     text-align: left;
     padding-bottom: 1px;
-    color: #707070;
+    color: var(--color-table-text);
 }
 
 .recent-expenses table th {
     color: #fff;
-    font-weight: bold; 
+    font-weight: bold;
     border-bottom: none;
     margin-bottom: 2px;
 }
@@ -94,7 +115,7 @@
 }
 
 .recent-expenses table td:last-child {
-    color: #dadada;
+    color: var(--color-table-footer-text);
     font-weight: bold;
 }
 
@@ -102,50 +123,48 @@
     height: 20px;
 }
 
-
 .marketing-category,
 .sales-category,
 .operations-category,
 .finance-category {
-    width: 73px; 
+    width: 73px;
     padding: 4px 6px;
     border-radius: 12px;
     text-align: center;
     font-weight: bold;
-    display: inline-block; 
+    display: inline-block;
     white-space: nowrap;
-    font-size: 10px;
+    font-size: var(--font-size-category);
 }
 
 .marketing-category {
-    background-color: #222255;
-    color: #9b7fd3 !important;
+    background-color: var(--color-category-marketing);
+    color: var(--color-category-marketing-text) !important;
 }
 
 .sales-category {
-    background-color: #682c2b;
-    color: #b20f1d !important; 
+    background-color: var(--color-category-sales);
+    color: var(--color-category-sales-text) !important;
 }
 
 .operations-category {
-    background-color: #6f2751;
-    color: #c92183 !important;
+    background-color: var(--color-category-operations);
+    color: var(--color-category-operations-text) !important;
 }
 
 .finance-category {
-    background-color: #124241;
-    color: #05b0a2 !important; 
+    background-color: var(--color-category-finance);
+    color: var(--color-category-finance-text) !important;
 }
 
 .recent-expenses table td {
-    vertical-align: middle; 
+    vertical-align: middle;
 }
 
 .recent-expenses table td.category-cell {
     text-align: center;
-    padding: 1px 0
+    padding: 1px 0;
 }
-
 
 @media (max-width: 768px) {
     .summary {
@@ -159,6 +178,6 @@
     }
 
     .summary .recent-expenses {
-        margin-bottom: 0; 
+        margin-bottom: 0;
     }
 }

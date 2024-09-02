@@ -1,11 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap');
 
+:root {
+  --background-color: #030303;
+  --label-color: #6c6c6c;
+  --input-background-color: #3c3c3c;
+  --input-text-color: #fff;
+  --primary-button-bg-color: #0b2463;
+  --primary-button-border-color: #0b2463;
+  --primary-button-hover-bg-color: #000066;
+  --primary-button-hover-border-color: #000066;
+}
+
 body {
   background-color: #030303 !important;
 }
 
 .container-fluid {
-  margin-top: -12vh; /* Adjust the top padding to move content upwards */
+  margin-top: -12vh;
+  /* Adjust the top padding to move content upwards */
 }
 
 .login-form {
@@ -13,20 +25,22 @@ body {
   max-width: 370px;
 }
 
-.label{
+.label {
   font-size: 0.4rem;
-  font-weight: bold; /* Make the label bold */
-  color: #6c6c6c;
+  font-weight: bold;
+  /* Make the label bold */
+  color: var(--label-color);
 }
 
 .login-form .form-label.label {
-  font-size: 0.875rem; /* Adjust size as needed */
+  font-size: 0.875rem;
+  /* Adjust size as needed */
 }
 
 .form-control {
-  background-color: #3c3c3c !important;
+  background-color: var(--input-background-color) !important;
   border: none !important;
-  color: #fff !important;
+  color: var(--input-text-color) !important;
   height: 31px;
 }
 
@@ -35,8 +49,8 @@ body {
 }
 
 .btn-primary {
-  background-color: #0b2463 !important;
-  border-color: #0b2463 !important;
+  background-color: var(--primary-button-bg-color) !important;
+  border-color: var(--primary-button-border-color) !important;
   height: 35px;
   display: flex;
   justify-content: center;
@@ -46,8 +60,8 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: #000066 !important;
-  border-color: #000066 !important;
+  background-color: var(--primary-button-hover-bg-color) !important;
+  border-color: var(--primary-button-hover-border-color) !important;
 }
 
 .form-label {
