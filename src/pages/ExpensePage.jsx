@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from '../components/Sidebar';
 import './css/ExpensePage.css';
 import { IoMdDownload, IoIosAdd } from "react-icons/io";
+import { Helmet } from "react-helmet-async";
 import { FaFilter } from "react-icons/fa";
 import { CgSortAz } from "react-icons/cg";
 import { BsThreeDots } from "react-icons/bs";
@@ -20,6 +21,9 @@ const ExpensesPage = () => {
 
     return (
         <div className="expenses-page-container">
+        <Helmet>
+            <title>Expense | Codeaza Technologies</title>
+        </Helmet>
             <Sidebar />
             <div className="expenses-content">
                 <div className="expenses-header">
