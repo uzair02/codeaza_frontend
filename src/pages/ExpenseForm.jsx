@@ -30,9 +30,6 @@ function ExpenseForm() {
                             <label htmlFor="total">Total*</label>
                             <div className="total-input">
                                 <input className='total-input-input' type="number" id="total" required />
-                                <select>
-                                    <option>Currency</option>
-                                </select>
                             </div>
                         </div>
                         <div className="form-row checkbox-row">
