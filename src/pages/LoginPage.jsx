@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './css/LoginPage.css';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 function LoginPage() {
   const [password, setPassword] = useState('');
@@ -14,6 +15,9 @@ function LoginPage() {
 
   return (
     <div className="container-fluid vh-100 d-flex flex-column justify-content-center align-items-center text-light">
+    <Helmet>
+        <title>Login | Codeaza Technologies</title>
+    </Helmet>
       <div className="mb-3 text-info" style={{ fontSize: '2rem' }}>
       <svg xmlns="http://www.w3.org/2000/svg" width="48" height="42" viewBox="0 0 24 24">
         <path 

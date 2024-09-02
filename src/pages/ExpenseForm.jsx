@@ -1,5 +1,6 @@
 import './css/ExpenseForm.css';
 import Sidebar from '../components/Sidebar';
+import { Helmet } from "react-helmet-async";
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -8,6 +9,9 @@ function ExpenseForm() {
 
     return (
         <div className="expenses-form-container">
+        <Helmet>
+            <title>Expense Form | Codeaza Technologies</title>
+        </Helmet>
             <Sidebar />
             <div className='expenses-form-content'>
                 <div className="expense-form-header">
