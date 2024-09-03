@@ -12,6 +12,10 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<LoginPage />} />
+<<<<<<< HEAD
+=======
+          <Route path='/login' element={<LoginPage />} />
+>>>>>>> 7f34442dde95cde20628db4b2958b6587fa5d542
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/expenses' element={<ExpensesPage />} />
           <Route path='/expenses-form' element={<ExpenseForm />} />
