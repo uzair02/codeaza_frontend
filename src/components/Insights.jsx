@@ -1,16 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'; 
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
+import { fetchLast5MonthsSummary } from '../api'; 
 import './css/insights.css';
-
-const data1 = [
-  { name: 'PJ', amount: 80500 },
-  { name: 'SJ', amount: 37000 },
-  { name: 'MB', amount: 89000 },
-  { name: 'IS', amount: 80500 },
-  { name: 'DW', amount: 37000 },
-  { name: 'NJ', amount: 59000 },
-  { name: 'BS', amount: 110000 },
-];
 
 const data2 = [
   { name: 'Accomodation', amount: 50000 },
@@ -20,28 +11,42 @@ const data2 = [
   { name: 'Fuel', amount: 30000 },
 ];
 
-
 const getColor1 = (value) => {
   if (value >= 100000) return '#124241';
-  if (value >= 80000) return '#00c7ab'; 
-  if (value >= 60000) return '#84dbce'; 
-  if (value >= 40000) return '#92e9dc'; 
-  if (value >= 20000) return '#d8fffb'; 
-  return '#fff'; 
+  if (value >= 80000) return '#00c7ab';
+  if (value >= 60000) return '#84dbce';
+  if (value >= 40000) return '#92e9dc';
+  if (value >= 20000) return '#d8fffb';
+  return '#fff';
 };
 
 const getColor2 = (value) => {
   if (value >= 100000) return '#590be2';
-  if (value >= 80000) return '#761ff1'; 
-  if (value >= 60000) return '#a56ff7'; 
-  if (value >= 40000) return '#c09bf9'; 
-  if (value >= 20000) return '#e9d9fb'; 
-  return '#fff'; 
+  if (value >= 80000) return '#761ff1';
+  if (value >= 60000) return '#a56ff7';
+  if (value >= 40000) return '#c09bf9';
+  if (value >= 20000) return '#e9d9fb';
+  return '#fff';
 };
 
 function Insights() {
+  const [data1, setData1] = useState([]);
   const gridColor = '#333334';
   const labelColor = '#8a8178';
+  const year = 2024;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await fetchLast5MonthsSummary(year); 
+        setData1(result); 
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [year]);
 
   return (
     <section className="insights">
@@ -60,7 +65,7 @@ function Insights() {
               <VictoryAxis
                 style={{
                   axis: { stroke: "none" },
-                  grid: { stroke: 'none' }, 
+                  grid: { stroke: 'none' },
                   tickLabels: { fontSize: 10, fill: labelColor },
                 }}
               />
@@ -69,17 +74,17 @@ function Insights() {
                 tickValues={[0, 20000, 40000, 60000, 80000, 100000]}
                 tickFormat={(t) => `${t / 1000}K`}
                 style={{
-                  axis: { stroke: "none" }, 
+                  axis: { stroke: "none" },
                   grid: { stroke: gridColor, strokeDasharray: '0' },
                   tickLabels: { fontSize: 10, fill: labelColor },
                 }}
               />
               <VictoryBar
-                data={data1.map(d => ({ x: d.name, y: d.amount }))}
+                data={data1.map(d => ({ x: d.month, y: d.amount }))}
                 style={{
-                  data: { 
+                  data: {
                     fill: ({ datum }) => getColor1(datum.y),
-                    borderRadius: 2 
+                    borderRadius: 2
                   },
                 }}
                 barWidth={15}
@@ -101,7 +106,7 @@ function Insights() {
               <VictoryAxis
                 style={{
                   axis: { stroke: "none" },
-                  grid: { stroke: 'none' }, 
+                  grid: { stroke: 'none' },
                   tickLabels: { fontSize: 10, fill: labelColor },
                 }}
               />
@@ -118,13 +123,13 @@ function Insights() {
               <VictoryBar
                 data={data2.map(d => ({ x: d.name, y: d.amount }))}
                 style={{
-                  data: { 
+                  data: {
                     fill: ({ datum }) => getColor2(datum.y),
                     borderRadius: 2
                   },
                 }}
                 barWidth={22}
-                cornerRadius={{ top: 2, bottom: 2 }} 
+                cornerRadius={{ top: 2, bottom: 2 }}
               />
             </VictoryChart>
           </div>
