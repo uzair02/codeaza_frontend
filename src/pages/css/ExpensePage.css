@@ -39,7 +39,7 @@
     flex-grow: 1;
     background-color: var(--content-background);
     border-radius: 6px;
-    margin: 20px 15px;
+    margin: 26px 15px;
     display: flex;
     flex-direction: column;
     gap: 20px;
