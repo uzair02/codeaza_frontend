@@ -1,8 +1,6 @@
-import axios from 'axios';
 
-const api = axios.create({
-  baseURL: 'http://localhost:8000',
-});
+
+
 
 api.interceptors.request.use(
   (config) => {
@@ -15,6 +13,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+export default api;
 
 // export async function fetchLast5MonthsSummary() {
 //     try {
