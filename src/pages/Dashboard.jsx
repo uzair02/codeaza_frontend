@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
@@ -8,16 +8,22 @@ import Insights from '../components/Insights';
 import './css/Dashboard.css';
 
 function Dashboard() {
+  const [selectedYear, setSelectedYear] = useState(null);
+
+  const handleYearChange = (year) => {
+    setSelectedYear(year);
+  };
+
   return (
     <div className="dashboard-container">
-    <Helmet>
-      <title>Dashboard | Codeaza Technologies</title>
-    </Helmet>
+      <Helmet>
+        <title>Dashboard | Codeaza Technologies</title>
+      </Helmet>
       <Sidebar />
       <main className="dashboard-content">
-        <Header />
+        <Header selectedYear={selectedYear} onYearChange={handleYearChange} />
         <div className="component-summary">
-          <Summary />
+          <Summary year={selectedYear} />
         </div>
         <div className="component-quickaccess">
           <QuickAccess />
