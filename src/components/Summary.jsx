@@ -1,26 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaRegClock, FaWallet } from 'react-icons/fa';
 import { IoMdAirplane } from "react-icons/io";
 import { MdShoppingCartCheckout } from "react-icons/md";
 import { RiExchangeDollarFill } from "react-icons/ri";
+import { fetchRecentExpenses } from "../api";
 import './css/Summary.css';
 
-function getCategoryClass(category) {
-    switch (category) {
-        case 'Marketing':
-            return 'marketing-category';
-        case 'Sales':
-            return 'sales-category';
-        case 'Operations':
-            return 'operations-category';
-        case 'Finance':
-            return 'finance-category';
-        default:
-            return '';
-    }
+function getCategoryClass(index) {
+  const categoryClasses = [
+      'category-1',
+      'category-2',
+      'category-3',
+      'category-4'
+  ];
+  
+  return categoryClasses[index % categoryClasses.length];
 }
 
 function Summary() {
+  const [recentExpenses, setRecentExpenses] = useState([]);
+
+  useEffect(() => {
+      const loadRecentExpenses = async () => {
+          try {
+              const expenses = await fetchRecentExpenses();
+              setRecentExpenses(expenses);
+          } catch (error) {
+              console.error('Error loading recent expenses:', error);
+          }
+      };
+
+      loadRecentExpenses();
+  }, []);
+  
   return (
     <section className="summary">
       <div className="general-summary">
@@ -65,36 +77,16 @@ function Summary() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Office Supplies</td>
-              <td>John Smith</td>
-              <td className={`category-cell ${getCategoryClass('Marketing')}`}>Marketing</td>
-              <td>€150.00</td>
-            </tr>
-            <tr>
-              <td>Office Supplies</td>
-              <td>John Smith</td>
-              <td className={`category-cell ${getCategoryClass('Sales')}`}>Sales</td>
-              <td>€150.00</td>
-            </tr>
-            <tr>
-              <td>Office Supplies</td>
-              <td>John Smith</td>
-              <td className={`category-cell ${getCategoryClass('Operations')}`}>Operations</td>
-              <td>€150.00</td>
-            </tr>
-            <tr>
-              <td>Office Supplies</td>
-              <td>John Smith</td>
-              <td className={`category-cell ${getCategoryClass('Marketing')}`}>Marketing</td>
-              <td>€150.00</td>
-            </tr>
-            <tr>
-              <td>Office Supplies</td>
-              <td>John Smith</td>
-              <td className={`category-cell ${getCategoryClass('Finance')}`}>Finance</td>
-              <td>€150.00</td>
-            </tr>
+          {recentExpenses.map((expense, index) => (
+                  <tr key={index}>
+                      <td>{expense.subject}</td>
+                      <td>{expense.added_by}</td>
+                      <td className={`category-cell ${getCategoryClass(index)}`}>
+                          {expense.category_name}
+                      </td>
+                      <td>PKR {expense.amount}</td>
+                  </tr>
+              ))}
           </tbody>
         </table>
       </div>

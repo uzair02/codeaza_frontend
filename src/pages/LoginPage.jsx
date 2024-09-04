@@ -40,17 +40,17 @@ const LoginPage = () => {
         <span>Technologies</span>
       </h1>
       <form onSubmit={handleSubmit} className="login-form">
-        <div className="mb-3 mt-3">
+        <div className="mb-1 mt-3">
           <label htmlFor="username" className="form-label label" style={{ fontSize: '0.875rem' }}>Enter username</label>
           <input
             type="text"
-            className="form-control bg-dark text-light border-0 mb-4"
+            className="form-control bg-dark text-light border-0"
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div className="mb-3 mt-3">
+        <div className="mb-3 mt-1">
           <label htmlFor="password" className="form-label label" style={{ fontSize: '0.875rem' }}>Enter password</label>
           <input
             type="password"

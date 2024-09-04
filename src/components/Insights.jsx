@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useEffect, useState } from 'react';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
-import { fetchLast5MonthsSummary } from '../api'; 
 import './css/insights.css';
+import { fetchLast5MonthsSummary } from '../api'; // Import the API function
 
 const data2 = [
-  { name: 'Accomodation', amount: 50000 },
+  { name: 'Accommodation', amount: 50000 },
   { name: 'Comms', amount: 20000 },
   { name: 'Services', amount: 111000 },
   { name: 'Food', amount: 88000 },
@@ -30,23 +30,23 @@ const getColor2 = (value) => {
 };
 
 function Insights() {
-  const [data1, setData1] = useState([]);
+  const [data1, setData1] = useState([]); // State to store fetched data
   const gridColor = '#333334';
   const labelColor = '#8a8178';
   const year = 2024;
 
   useEffect(() => {
-    const fetchData = async () => {
+    const getData = async () => {
       try {
-        const result = await fetchLast5MonthsSummary(year); 
-        setData1(result); 
+        const summaryData = await fetchLast5MonthsSummary(year);
+        setData1(summaryData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Failed to fetch data:', error);
       }
     };
 
-    fetchData();
-  }, [year]);
+    getData();
+  }, []);
 
   return (
     <section className="insights">
@@ -64,7 +64,7 @@ function Insights() {
             >
               <VictoryAxis
                 style={{
-                  axis: { stroke: "none" },
+                  axis: { stroke: 'none' },
                   grid: { stroke: 'none' },
                   tickLabels: { fontSize: 10, fill: labelColor },
                 }}
@@ -74,17 +74,17 @@ function Insights() {
                 tickValues={[0, 20000, 40000, 60000, 80000, 100000]}
                 tickFormat={(t) => `${t / 1000}K`}
                 style={{
-                  axis: { stroke: "none" },
+                  axis: { stroke: 'none' },
                   grid: { stroke: gridColor, strokeDasharray: '0' },
                   tickLabels: { fontSize: 10, fill: labelColor },
                 }}
               />
               <VictoryBar
-                data={data1.map(d => ({ x: d.month, y: d.amount }))}
+                data={data1.map((d) => ({ x: d.month, y: d.amount }))}
                 style={{
                   data: {
                     fill: ({ datum }) => getColor1(datum.y),
-                    borderRadius: 2
+                    borderRadius: 2,
                   },
                 }}
                 barWidth={15}
@@ -105,7 +105,7 @@ function Insights() {
             >
               <VictoryAxis
                 style={{
-                  axis: { stroke: "none" },
+                  axis: { stroke: 'none' },
                   grid: { stroke: 'none' },
                   tickLabels: { fontSize: 10, fill: labelColor },
                 }}
@@ -115,17 +115,17 @@ function Insights() {
                 tickValues={[0, 20000, 40000, 60000, 80000, 100000]}
                 tickFormat={(t) => `${t / 1000}%`}
                 style={{
-                  axis: { stroke: "none" },
+                  axis: { stroke: 'none' },
                   grid: { stroke: gridColor, strokeDasharray: '0' },
                   tickLabels: { fontSize: 10, fill: labelColor },
                 }}
               />
               <VictoryBar
-                data={data2.map(d => ({ x: d.name, y: d.amount }))}
+                data={data2.map((d) => ({ x: d.name, y: d.amount }))}
                 style={{
                   data: {
                     fill: ({ datum }) => getColor2(datum.y),
-                    borderRadius: 2
+                    borderRadius: 2,
                   },
                 }}
                 barWidth={22}

@@ -7,14 +7,14 @@
     --color-table-header: #c2bfb3;
     --color-table-text: #707070;
     --color-table-footer-text: #dadada;
-    --color-category-marketing: #222255;
-    --color-category-marketing-text: #9b7fd3;
-    --color-category-sales: #682c2b;
-    --color-category-sales-text: #b20f1d;
-    --color-category-operations: #6f2751;
-    --color-category-operations-text: #c92183;
-    --color-category-finance: #124241;
-    --color-category-finance-text: #05b0a2;
+    --color-category-1-bg: #222255;
+    --color-category-1-text: #9b7fd3;
+    --color-category-2-bg: #682c2b;
+    --color-category-2-text: #b20f1d;
+    --color-category-3-bg: #6f2751;
+    --color-category-3-text: #c92183;
+    --color-category-4-bg: #124241;
+    --color-category-4-text: #05b0a2;
     --font-size-heading: 12px;
     --font-size-category: 10px;
 }
@@ -123,10 +123,7 @@
     height: 20px;
 }
 
-.marketing-category,
-.sales-category,
-.operations-category,
-.finance-category {
+.category-cell {
     width: 73px;
     padding: 4px 6px;
     border-radius: 12px;
@@ -137,24 +134,24 @@
     font-size: var(--font-size-category);
 }
 
-.marketing-category {
-    background-color: var(--color-category-marketing);
-    color: var(--color-category-marketing-text) !important;
+.category-1 {
+    background-color: var(--color-category-1-bg);
+    color: var(--color-category-1-text) !important;
 }
 
-.sales-category {
-    background-color: var(--color-category-sales);
-    color: var(--color-category-sales-text) !important;
+.category-2 {
+    background-color: var(--color-category-2-bg);
+    color: var(--color-category-2-text) !important;
 }
 
-.operations-category {
-    background-color: var(--color-category-operations);
-    color: var(--color-category-operations-text) !important;
+.category-3 {
+    background-color: var(--color-category-3-bg);
+    color: var(--color-category-3-text) !important;
 }
 
-.finance-category {
-    background-color: var(--color-category-finance);
-    color: var(--color-category-finance-text) !important;
+.category-4 {
+    background-color: var(--color-category-4-bg);
+    color: var(--color-category-4-text) !important;
 }
 
 .recent-expenses table td {
