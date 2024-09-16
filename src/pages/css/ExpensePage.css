@@ -294,31 +294,82 @@
     background-color: var(--year-2023-background);
 }
 
-/* Specific styles for category icons */
-.food-catering {
-    background-color: var(--food-catering-color);
+.search-bar-container {
+    margin: 10px 0;
 }
 
-.office-supplies {
-    background-color: var(--office-supplies-color);
+.search-bar {
+    background-color: var(--extra-button-background);
+    color: var(--button-text-color);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    color: wheat;
 }
 
-.business-lunch {
-    background-color: var(--business-lunch-color);
+.search-bar::placeholder {
+    color: white;
 }
 
-.travel-expenses {
-    background-color: var(--travel-expenses-color);
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 10px 0;
+    font-family: Arial, sans-serif;
+
 }
 
-.client-dinner {
-    background-color: var(--client-dinner-color);
+.pagination-controls button {
+    background-color: var(--button-background);
+    color: var(--button-text-color);
+    border: none;
+    height: var(--height-small);
+    padding: 0px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.accommodation {
-    background-color: var(--accommodation-color);
+.pagination-controls button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
 }
 
-.news-subscription {
-    background-color: var(--news-subscription-color);
+.pagination-controls button:hover:not(:disabled) {
+    transform: scale(1.05); 
+    /* Darker shade for hover */
+}
+
+/* Span (Page Indicator) Styling */
+.pagination-controls span {
+    font-size: 16px;
+    color: #333;
+    /* Adjust to match the text color on your page */
+}
+
+.pagination-controls select {
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    font-weight: 500;
+    border: none;
+    padding: var(--padding-small);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-small);
+    cursor: pointer;
+    width: 100px;
+    /* Adjust width as needed */
+    height: var(--height-small);
+    text-align: left;
+    margin-left: auto;
+}
+
+.pagination-controls select option {
+    background-color: var(--background-dark);
+    color: var(--text-muted);
 }
