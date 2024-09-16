@@ -29,7 +29,7 @@ function Dashboard() {
           <QuickAccess />
         </div>
         <div className="component-insights">
-          <Insights />
+          <Insights year={selectedYear} />
         </div>
       </main>
     </div>
