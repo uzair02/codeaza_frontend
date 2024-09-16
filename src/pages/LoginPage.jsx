@@ -1,26 +1,100 @@
 import React, { useState } from 'react';
 import './css/LoginPage.css';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import Swal from 'sweetalert2';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({});
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await login(username, password);
-      navigate('/dashboard');
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
+  const validateForm = () => {
+    const errors = {};
+    if (!username) errors.username = 'Username is required';
+    if (!password) errors.password = 'Password is required';
+    return errors;
   };
 
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validationErrors = validateForm();
+  
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+  
+    try {
+      await login(username, password);
+      Swal.fire({
+        title: 'Login Successful',
+        text: 'Welcome back! You have successfully logged in.',
+        icon: 'success',
+        timer: 2000,
+        timerProgressBar: true,
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        background: '#1b1b1b',
+        color: '#d8fffb',
+        customClass: {
+          title: 'swal2-title',
+          popup: 'swal2-popup',
+          timerProgressBar: 'green-progress-bar',
+        },
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        }
+      });
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 1000);
+    } catch (error) {
+      console.error('Login failed:', error);
+  
+      let errorMessage = 'Login failed. Please try again.';
+  
+      if (error.response && error.response.data) {
+        
+        if (error.response.data.detail && typeof error.response.data.detail === 'object') {
+          errorMessage = error.response.data.detail.detail;
+        } else if (error.response.data.detail) {
+          errorMessage = error.response.data.detail;
+        }
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+  
+      Swal.fire({
+        title: 'Login Failed',
+        text: errorMessage,
+        icon: 'error',
+        toast: true,
+        timer: 3000,
+        timerProgressBar: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        background: '#1b1b1b',
+        color: '#d8fffb',
+        customClass: {
+          title: 'swal2-title',
+          popup: 'swal2-popup',
+          timerProgressBar: 'red-progress-bar',
+        },
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        }
+      });
+    }
+  };
+  
+  
   return (
     <div className="container-fluid vh-100 d-flex flex-column justify-content-center align-items-center text-light">
       <Helmet>
@@ -44,21 +118,29 @@ const LoginPage = () => {
           <label htmlFor="username" className="form-label label" style={{ fontSize: '0.875rem' }}>Enter username</label>
           <input
             type="text"
-            className="form-control bg-dark text-light border-0"
+            className={`form-control bg-dark text-light border-0 ${errors.username ? 'is-invalid' : ''}`}
             id="username"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => {
+              setUsername(e.target.value);
+              setErrors((prevErrors) => ({ ...prevErrors, username: '' }));
+            }}
           />
+          {errors.username && <div className="invalid-feedback">{errors.username}</div>}
         </div>
         <div className="mb-3 mt-1">
           <label htmlFor="password" className="form-label label" style={{ fontSize: '0.875rem' }}>Enter password</label>
           <input
             type="password"
-            className="form-control bg-dark text-light border-0 mb-4"
+            className={`form-control bg-dark text-light border-0 mb-4 ${errors.password ? 'is-invalid' : ''}`}
             id="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setErrors((prevErrors) => ({ ...prevErrors, password: '' }));
+            }}
           />
+          {errors.password && <div className="invalid-feedback">{errors.password}</div>}
         </div>
         <button type="submit" className="btn btn-primary w-100 mt-1">
           Login

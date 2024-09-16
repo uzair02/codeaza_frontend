@@ -322,3 +322,17 @@
 .news-subscription {
     background-color: var(--news-subscription-color);
 }
+
+.swal2-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.swal2-popup {
+    border-radius: 10px;
+    padding: 20px;
+}
+.custom-confirm-button{
+    background-color: #ffd700;
+    color: var(--extra-button-background);
+}

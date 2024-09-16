@@ -80,3 +80,21 @@ body {
 .heading span {
   display: block;
 }
+
+.swal2-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.swal2-popup {
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.green-progress-bar {
+  background: #4CAF50 !important;
+}
+
+.red-progress-bar {
+  background: #f27474 !important;
+}

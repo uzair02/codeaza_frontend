@@ -121,6 +121,7 @@
 
 .recent-expenses table tr {
     height: 20px;
+    font-weight: bold;
 }
 
 .category-cell {

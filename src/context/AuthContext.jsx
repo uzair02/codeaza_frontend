@@ -1,4 +1,3 @@
-// src/context/AuthContext.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
@@ -12,12 +11,25 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem('token');
         if (token) {
             setUser({ token });
-        } setLoading(false);
+        }
+        setLoading(false);
+
+        // Listen for window close event
+        const handleBeforeUnload = () => {
+            localStorage.removeItem('token');
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        // Clean up the event listener
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
     }, []);
 
     const login = async (username, password) => {
         try {
-            const response = await axios.post('http://localhost:8000/login',
+            const response = await axios.post('http://127.0.0.1:8000/login',
                 new URLSearchParams({ username, password }),
                 { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
             );
@@ -41,6 +53,7 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context) {
