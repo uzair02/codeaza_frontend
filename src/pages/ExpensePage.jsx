@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import './css/ExpensePage.css';
 import { IoMdDownload, IoIosAdd } from "react-icons/io";
@@ -7,23 +8,81 @@ import { FaFilter } from "react-icons/fa";
 import { CgSortAz } from "react-icons/cg";
 import { BsThreeDots } from "react-icons/bs";
 import { Link } from 'react-router-dom';
+import { getExpenses } from '../api';
+
+// Define a list of distinct dark colors
+const colorPalette = [
+    '#FF5733', // Dark Red
+    '#33FF57', // Dark Green
+    '#3357FF', // Dark Blue
+    '#F1C40F', // Dark Yellow
+    '#9B59B6', // Dark Purple
+    '#E67E22', // Dark Orange
+    '#1ABC9C', // Dark Teal
+];
+
+// Generate a color index based on the index of the expense
+const getColorIndex = (index) => {
+    return index % colorPalette.length;
+};
 
 const ExpensesPage = () => {
-    const expenses = [
-        { id: 1, date: '29/11/2022', description: 'McFood McFoodMcFoodMcFoodMcFo', amount: 'PKR 250.00', category: 'Food Catering', year: '2024' },
-        { id: 2, date: '29/11/2022', description: 'Officio', amount: 'PKR 150.00', category: 'Office Supplies', year: '2024' },
-        { id: 3, date: '11/11/2022', description: 'Restaurant Restaurant Restaurant Restaurant', amount: 'PKR 75.50', category: 'Business Lunch', year: '2024' },
-        { id: 4, date: '11/11/2022', description: 'Airlines Airlines Airlines', amount: 'PKR 450.25', category: 'Travel Expenses', year: '2023' },
-        { id: 5, date: '12/11/2022', description: 'Bistro', amount: 'PKR 120.00', category: 'Client Dinner', year: '2024' },
-        { id: 6, date: '8/11/2022', description: 'Hotel ***', amount: 'PKR 275.75', category: 'Accommodation', year: '2023' },
-        { id: 7, date: '29/11/2022', description: 'NewsTimes', amount: 'PKR 30.00', category: 'News Subscription', year: '2024' },
-    ];
+    const [expenses, setExpenses] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [sortOrder, setSortOrder] = useState('desc');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filterVisible, setFilterVisible] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [pageSize, setPageSize] = useState(7);
+
+    useEffect(() => {
+        const fetchExpenses = async () => {
+            try {
+                const params = {
+                    page: currentPage,
+                    size: pageSize,
+                    search: searchTerm,
+                    sort_order: sortOrder
+                };
+                const data = await getExpenses(params);
+                setExpenses(data.items);
+                setTotalPages(Math.ceil(data.total / pageSize));
+                setLoading(false);
+            } catch (err) {
+                setError(err);
+                setLoading(false);
+            }
+        };
+
+        fetchExpenses();
+    }, [searchTerm, sortOrder, currentPage, pageSize]);
+
+    const handleSortToggle = () => {
+        setSortOrder(prevOrder => prevOrder === 'desc' ? 'asc' : 'desc');
+    };
+
+    const handleFilterToggle = () => {
+        setFilterVisible(prevVisible => !prevVisible);
+    };
+    const handlePageChange = (newPage) => {
+        setCurrentPage(newPage);
+    };
+
+    const handlePageSizeChange = (event) => {
+        const newSize = Number(event.target.value);
+        setPageSize(newSize);
+        setCurrentPage(1);  // Reset to first page when changing page size
+    };
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error loading expenses</p>;
 
     return (
         <div className="expenses-page-container">
-        <Helmet>
-            <title>Expense | Codeaza Technologies</title>
-        </Helmet>
+            <Helmet>
+                <title>Expense | Codeaza Technologies</title>
+            </Helmet>
             <Sidebar />
             <div className="expenses-content">
                 <div className="expenses-header">
@@ -39,10 +98,10 @@ const ExpensesPage = () => {
                                 New expense
                             </Link>
                             <div className="extra-buttons">
-                                <button className="filter-btn">
+                                <button className="filter-btn" onClick={handleFilterToggle}>
                                     <FaFilter className='icon' />
                                 </button>
-                                <button className="options-btn">
+                                <button className="options-btn" onClick={handleSortToggle}>
                                     <CgSortAz className='icon' />
                                 </button>
                                 <button className="more-btn">
@@ -52,6 +111,17 @@ const ExpensesPage = () => {
                         </div>
                     </div>
                 </div>
+                {filterVisible && (
+                    <div className="search-bar-container">
+                        <input
+                            type="text"
+                            className="search-bar"
+                            placeholder="Search expenses..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </div>
+                )}
                 <table className="expenses-table">
                     <thead>
                         <tr>
@@ -64,31 +134,58 @@ const ExpensesPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {expenses.map((expense) => (
-                            <tr key={expense.id}>
-                                <td className='checkbox'><input type="checkbox" /></td>
-                                <td>
-                                    <div className="category-container">
-                                        <span className={`category-icon ${expense.category.toLowerCase().replace(' ', '-')}`}></span>
-                                        <div className="text-container">
-                                            <span className="date">{expense.date}</span>
-                                            <span className="category-name">{expense.category}</span>
+                        {expenses.map((expense, index) => {
+                            const color = colorPalette[getColorIndex(index)];
+
+                            return (
+                                <tr key={expense.expenses_id}>
+                                    <td className='checkbox'><input type="checkbox" /></td>
+                                    <td>
+                                        <div className="category-container">
+                                            <span className="category-icon" style={{ backgroundColor: color }}></span>
+                                            <div className="text-container">
+                                                <span className="date">{expense.expense_date}</span>
+                                                <span className="category-name">{expense.subject}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>{expense.description}</td>
-                                <td>{expense.amount}</td>
-                                <td>{expense.date}</td>
-                                <td><span className={`year-badge year-${expense.year}`}>{expense.year}</span></td>
-                            </tr>
-                        ))}
+                                    </td>
+                                    <td>{expense.description}</td>
+                                    <td>{expense.amount}</td>
+                                    <td>{expense.expense_date}</td>
+                                    <td><span className={`year-badge year-${new Date(expense.expense_date).getFullYear()}`}>{new Date(expense.expense_date).getFullYear()}</span></td>
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </table>
-
-
+                <div className="pagination-controls">
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                    >
+                        Previous
+                    </button>
+                    <span>Page {currentPage} of {totalPages}</span>
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                    >
+                        Next
+                    </button>
+                    <select
+                        value={pageSize}
+                        onChange={handlePageSizeChange}
+                    >
+                        <option value="7">7 per page</option>
+                        <option value="14">14 per page</option>
+                        <option value="21">21 per page</option>
+                    </select>
+                </div>
             </div>
         </div>
     );
 };
 
 export default ExpensesPage;
+
+
