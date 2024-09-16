@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
-import { fetchLast5MonthsSummary } from '../api'; 
+import { fetchExpensesByCategory } from '../api';
 import './css/insights.css';
 
 const data2 = [
@@ -29,17 +29,17 @@ const getColor2 = (value) => {
   return '#fff';
 };
 
-function Insights() {
+function Insights({ year }) {
   const [data1, setData1] = useState([]);
+  const [data2, setData2] = useState([]);
   const gridColor = '#333334';
   const labelColor = '#8a8178';
-  const year = 2024;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await fetchLast5MonthsSummary(year); 
-        setData1(result); 
+        const result = await fetchExpensesByCategory(year);
+        setData2(result); // Set the fetched data to state
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -47,7 +47,6 @@ function Insights() {
 
     fetchData();
   }, [year]);
-
   return (
     <section className="insights">
       <h3>Month on Month Insights</h3>
@@ -113,7 +112,7 @@ function Insights() {
               <VictoryAxis
                 dependentAxis
                 tickValues={[0, 20000, 40000, 60000, 80000, 100000]}
-                tickFormat={(t) => `${t / 1000}%`}
+                tickFormat={(t) => `${t / 1000}K`}
                 style={{
                   axis: { stroke: "none" },
                   grid: { stroke: gridColor, strokeDasharray: '0' },
@@ -121,7 +120,7 @@ function Insights() {
                 }}
               />
               <VictoryBar
-                data={data2.map(d => ({ x: d.name, y: d.amount }))}
+                data={data2.map(d => ({ x: d.category, y: d.amount }))}
                 style={{
                   data: {
                     fill: ({ datum }) => getColor2(datum.y),
