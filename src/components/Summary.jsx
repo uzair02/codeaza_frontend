@@ -4,7 +4,9 @@ import { FaRegClock, FaWallet } from 'react-icons/fa';
 import { IoMdAirplane } from "react-icons/io";
 import { MdShoppingCartCheckout } from "react-icons/md";
 import { RiExchangeDollarFill } from "react-icons/ri";
+import { fetchGeneralSummary } from "../api"
 import './css/Summary.css';
+
 
 function getCategoryClass(category) {
   switch (category) {
@@ -34,29 +36,24 @@ function Summary({ year }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchGeneralSummary = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/expenses/general-summary", {
-          params: { year }
-        });
-        setSummary(response.data);
+        const result = await fetchGeneralSummary(year);
+        setSummary(result);
       } catch (error) {
-        console.error("Error fetching general summary:", error);
-        setError("Failed to load general summary.");
+        setError('Failed to load general summary.');
       } finally {
         setLoading(false);
       }
     };
 
     if (year) {
-      fetchGeneralSummary();
+      fetchData();
     } else {
-      setLoading(false); // No year selected, do not show loading
+      setLoading(false);
     }
   }, [year]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
 
   return (
     <section className="summary">
