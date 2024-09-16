@@ -1,35 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './css/Header.css';
-import axios from 'axios';
+import { fetchAvailableYears } from '../api';
 
 function Header({ selectedYear, onYearChange }) {
-  const [years, setYears] = React.useState([]);
-
-  const handleYearChange = (event) => {
-    onYearChange(parseInt(event.target.value)); // Notify parent of the selected year
-  };
+  const [years, setYears] = useState([]);
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    const fetchAvailableYears = async () => {
+    const fetchYears = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/expenses/available-years');
-        if (Array.isArray(response.data)) {
-          setYears(response.data);
+        const availableYears = await fetchAvailableYears();
+        if (Array.isArray(availableYears) && availableYears.length > 0) {
+          setYears(availableYears);
+
+          // Set the initial selected year to the first year in the list if not initialized
+          if (!initialized) {
+            onYearChange(availableYears[0]);
+            setInitialized(true);
+          }
         } else {
-          console.error("Unexpected response format:", response.data);
+          console.error("Unexpected response format:", availableYears);
         }
       } catch (error) {
         console.error("Error fetching available years:", error);
       }
     };
 
-    fetchAvailableYears();
-  }, []);
+    fetchYears();
+  }, [initialized, onYearChange]);
+
+  const handleYearChange = (event) => {
+    const newYear = parseInt(event.target.value);
+    onYearChange(newYear); // Notify parent of the selected year
+  };
 
   return (
     <header className="content-header">
-      <select className="year-dropdown" value={selectedYear || ''} onChange={handleYearChange}>
-        <option value="">Year</option>
+      <select
+        className="year-dropdown"
+        value={selectedYear || ''}
+        onChange={handleYearChange}
+      >
         {years.map((year) => (
           <option key={year} value={year}>{year}</option>
         ))}
