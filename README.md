@@ -59,6 +59,3 @@ The application will be accessible at `http://localhost:5173/`.
 - **Node.js**
 - **CSS** (for styling)
 
----
-
-Feel free to extend this README as the project grows!
