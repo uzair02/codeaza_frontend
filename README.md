@@ -59,3 +59,5 @@ The application will be accessible at `http://localhost:5173/`.
 - **Node.js**
 - **CSS** (for styling)
 
+
+**Project developed by Chemsa Technologies**
