@@ -30,7 +30,7 @@ The **Finance Management System** is an admin-focused application for managing a
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/uzair02/codeaza_frontend-FastAPI.git
    ```
 2. **Navigate to the project directory**:
    ```bash
